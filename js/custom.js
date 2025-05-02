@@ -1,21 +1,39 @@
 // menu toggle
-
-const menu = document.querySelector(".menu");
-const icon = document.querySelector(".menu i");
+const menu = document.querySelector('.menu');
+const icon = document.querySelector('.menu i');
+const nav = document.querySelector('.navi');
 
 // menu를 클릭하면 active라는 클래스가 생성됐다 안 됐다 할 수 있음.
-menu.addEventListener("click", function(){
-    this.classList.toggle("active");
+menu.addEventListener('click', function () {
+  this.classList.toggle('active');
+  const navHeight = nav.scrollHeight;
 
-    // if(this.classList.contains('active')) {
-    //     // console.log("있다");
-    //     icon.setAttribute("class", "ri-close-line");
-    // } else {
-    //     // console.log("없다");
-    //     icon.setAttribute("class", "ri-menu-line");
-    // }
+  //   console.log(navHeight);
 
-    (this.classList.contains('active')) ? icon.setAttribute("class", "ri-close-line") : icon.setAttribute("class", "ri-menu-line");
-})
+  if (this.classList.contains('active')) {
+    icon.setAttribute('class', 'ri-close-line');
+    nav.style.height = navHeight + 'PX';
+  } else {
+    icon.setAttribute('class', 'ri-menu-line');
+    nav.style.height = 0;
+  }
 
-console.log(menu);
+  //   this.classList.contains('active')
+  //     ? icon.setAttribute('class', 'ri-close-line')
+  //     : icon.setAttribute('class', 'ri-menu-line');
+});
+
+// Navigation Activate
+const navs = document.querySelectorAll('.navi li');
+
+navs.forEach((nav, idx) => {
+  nav.addEventListener('click', function () {
+    navs.forEach((nav) => {
+      nav.classList.remove('active');
+    });
+
+    this.classList.add('active');
+  });
+});
+
+// console.log(navs);
